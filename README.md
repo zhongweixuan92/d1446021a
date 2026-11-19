@@ -1,246 +1,48 @@
-{
-  "nbformat": 4,
-  "nbformat_minor": 0,
-  "metadata": {
-    "colab": {
-      "provenance": []
-    },
-    "kernelspec": {
-      "name": "python3",
-      "display_name": "Python 3"
-    },
-    "language_info": {
-      "name": "python"
-    }
-  },
-  "cells": [
-    {
-      "cell_type": "code",
-      "source": [
-        "activity_names = (\"桌遊體驗\",\"電影欣賞\")\n",
-        "unit_fees = {\"桌遊體驗\":120,\"電影欣賞\":80}\n",
-        "\n",
-        "print(\"=\" * 40)\n",
-        "print(\"HW09 活動報名摘要\")\n",
-        "print(\"=\" * 40)\n",
-        "print(f\"活動：{activity_names[0]}，每人 {unit_fees[activity_names[0]]:.2f}元\")\n",
-        "print(f\"活動：{activity_names[1]}，每人 {unit_fees[activity_names[1]]:.2f}元\\n\")\n",
-        "\n",
-        "# 測試一\n",
-        "print(\"--- [ 測試一 ] ---\")\n",
-        "board_raw_1 = \" Amy, Ben, amy, Cora \"\n",
-        "movie_raw_1 = \" ben, Dora, ERIC, ben \"\n",
-        "\n",
-        "board_list_1 = [name.strip().lower() for name in board_raw_1.split(\",\")]\n",
-        "movie_list_1 = [name.strip().lower() for name in movie_raw_1.split(\",\")]\n",
-        "\n",
-        "print(f\"桌遊整理串列：{board_list_1}\")\n",
-        "print(f\"電影整理串列：{movie_list_1}\")\n",
-        "\n",
-        "board_set_1 = set(board_list_1)\n",
-        "movie_set_1 = set(movie_list_1)\n",
-        "\n",
-        "board_unique_1 = sorted(board_set_1)\n",
-        "movie_unique_1 = sorted(movie_set_1)\n",
-        "print(f\"桌遊去重名單：{board_unique_1}\")\n",
-        "print(f\"電影去重名單：{movie_unique_1}\")\n",
-        "\n",
-        "common_set_1 = board_set_1.intersection(movie_set_1)\n",
-        "only_board_set_1 = board_set_1.difference(movie_set_1)\n",
-        "only_movie_set_1 = movie_set_1.difference(board_set_1)\n",
-        "all_participants_set_1 = board_set_1.union(movie_set_1)\n",
-        "\n",
-        "common_1 = sorted(common_set_1)\n",
-        "only_board_1 = sorted(only_board_set_1)\n",
-        "only_movie_1 = sorted(only_movie_set_1)\n",
-        "all_participants_1 = sorted(all_participants_set_1)\n",
-        "\n",
-        "print(f\"桌遊人數：{len(board_set_1)} 人\")\n",
-        "print(f\"電影人數：{len(movie_set_1)} 人\")\n",
-        "print(f\"共同參加者：{common_1}\")\n",
-        "print(f\"共同人數：{len(common_set_1)}人\")\n",
-        "print(f\"只參加桌遊者：{only_board_1}\")\n",
-        "print(f\"只參加電影者：{only_movie_1}\")\n",
-        "print(f\"全部參加者：{all_participants_1}\")\n",
-        "print(f\"總不重複人數：{len(all_participants_set_1)}人\")\n",
-        "print(f\"報名人次：{len(board_set_1) + len(movie_set_1)}人次\")\n",
-        "print(f\"通知名單前兩位：{all_participants_1[:2]}\")\n",
-        "\n",
-        "summary_1 = {\n",
-        "    \"board_count\": len(board_set_1),\n",
-        "    \"movie_count\": len(movie_set_1),\n",
-        "    \"board_fee\": len(board_set_1) * unit_fees[\"桌遊體驗\"],\n",
-        "    \"movie_fee\": len(movie_set_1) * unit_fees[\"電影欣賞\"],\n",
-        "    \"total_fee\": (len(board_set_1) * unit_fees[\"桌遊體驗\"]) + (len(movie_set_1) * unit_fees[\"電影欣賞\"])\n",
-        "}\n",
-        "\n",
-        "print(f\"桌遊應收：{summary_1['board_fee']:.2f} 元\")\n",
-        "print(f\"電影應收：{summary_1['movie_fee']:.2f} 元\")\n",
-        "print(f\"總應收：{summary_1['total_fee']:.2f} 元\\n\")\n",
-        "\n",
-        "\n",
-        "# 測試二\n",
-        "print(\"--- [ 測試二 ] ---\")\n",
-        "board_raw_2 = \" Amy, Ben, amy, Cora \"\n",
-        "movie_raw_2 = \" ben, Dora, ERIC, ben, Frank \"\n",
-        "\n",
-        "board_list_2 = [name.strip().lower() for name in board_raw_2.split(\",\")]\n",
-        "movie_list_2 = [name.strip().lower() for name in movie_raw_2.split(\",\")]\n",
-        "\n",
-        "board_set_2 = set(board_list_2)\n",
-        "movie_set_2 = set(movie_list_2)\n",
-        "\n",
-        "board_unique_2 = sorted(board_set_2)\n",
-        "movie_unique_2 = sorted(movie_set_2)\n",
-        "print(f\"桌遊去重名單：{board_unique_2}\")\n",
-        "print(f\"電影去重名單：{movie_unique_2}\")\n",
-        "\n",
-        "common_set_2 = board_set_2.intersection(movie_set_2)\n",
-        "only_board_set_2 = board_set_2.difference(movie_set_2)\n",
-        "only_movie_set_2 = movie_set_2.difference(board_set_2)\n",
-        "all_participants_set_2 = board_set_2.union(movie_set_2)\n",
-        "\n",
-        "common_2 = sorted(common_set_2)\n",
-        "only_board_2 = sorted(only_board_set_2)\n",
-        "only_movie_2 = sorted(only_movie_set_2)\n",
-        "all_participants_2 = sorted(all_participants_set_2)\n",
-        "\n",
-        "print(f\"桌遊人數：{len(board_set_2)} 人\")\n",
-        "print(f\"電影人數：{len(movie_set_2)} 人\")\n",
-        "print(f\"共同參加者：{common_2}\")\n",
-        "print(f\"只參加桌遊者：{only_board_2}\")\n",
-        "print(f\"只參加電影者：{only_movie_2}\")\n",
-        "print(f\"總不重複人數：{len(all_participants_set_2)} 人\")\n",
-        "print(f\"報名人次：{len(board_set_2) + len(movie_set_2)} 人次\")\n",
-        "print(f\"通知名單前兩位：{all_participants_2[:2]}\")\n",
-        "\n",
-        "summary_2 = {\n",
-        "    \"board_fee\": len(board_set_2) * unit_fees[\"桌遊體驗\"],\n",
-        "    \"movie_fee\": len(movie_set_2) * unit_fees[\"電影欣賞\"],\n",
-        "    \"total_fee\": (len(board_set_2) * unit_fees[\"桌遊體驗\"]) + (len(movie_set_2) * unit_fees[\"電影欣賞\"])\n",
-        "}\n",
-        "\n",
-        "print(f\"桌遊應收：{summary_2['board_fee']:.2f} 元\")\n",
-        "print(f\"電影應收：{summary_2['movie_fee']:.2f} 元\")\n",
-        "print(f\"總應收：{summary_2['total_fee']:.2f} 元\\n\")\n",
-        "\n",
-        "\n",
-        "# 測試三\n",
-        "print(\"--- [ 測試三 ] ---\")\n",
-        "board_raw_3 = \" Amy, Ben, amy, Cora \"\n",
-        "movie_raw_3 = \" AMY, ben, CORA, amy \"\n",
-        "\n",
-        "board_list_3 = [name.strip().lower() for name in board_raw_3.split(\",\")]\n",
-        "movie_list_3 = [name.strip().lower() for name in movie_raw_3.split(\",\")]\n",
-        "\n",
-        "board_set_3 = set(board_list_3)\n",
-        "movie_set_3 = set(movie_list_3)\n",
-        "\n",
-        "board_unique_3 = sorted(board_set_3)\n",
-        "movie_unique_3 = sorted(movie_set_3)\n",
-        "print(f\"桌遊去重名單：{board_unique_3}\")\n",
-        "print(f\"電影去重名單：{movie_unique_3}\")\n",
-        "\n",
-        "common_set_3 = board_set_3.intersection(movie_set_3)\n",
-        "only_board_set_3 = board_set_3.difference(movie_set_3)\n",
-        "only_movie_set_3 = movie_set_3.difference(board_set_3)\n",
-        "all_participants_set_3 = board_set_3.union(movie_set_3)\n",
-        "\n",
-        "common_3 = sorted(common_set_3)\n",
-        "only_board_3 = sorted(only_board_set_3)\n",
-        "only_movie_3 = sorted(only_movie_set_3)\n",
-        "all_participants_3 = sorted(all_participants_set_3)\n",
-        "\n",
-        "print(f\"桌遊人數：{len(board_set_3)} 人\")\n",
-        "print(f\"電影人數：{len(movie_set_3)} 人\")\n",
-        "print(f\"共同參加者：{common_3}\")\n",
-        "print(f\"只參加桌遊者：{only_board_3}\")\n",
-        "print(f\"只參加電影者：{only_movie_3}\")\n",
-        "print(f\"總不重複人數：{len(all_participants_set_3)} 人\")\n",
-        "print(f\"報名人次：{len(board_set_3) + len(movie_set_3)} 人次\")\n",
-        "print(f\"通知名單前兩位：{all_participants_3[:2]}\")\n",
-        "\n",
-        "summary_3 = {\n",
-        "    \"board_fee\": len(board_set_3) * unit_fees[\"桌遊體驗\"],\n",
-        "    \"movie_fee\": len(movie_set_3) * unit_fees[\"電影欣賞\"],\n",
-        "    \"total_fee\": (len(board_set_3) * unit_fees[\"桌遊體驗\"]) + (len(movie_set_3) * unit_fees[\"電影欣賞\"])\n",
-        "}\n",
-        "\n",
-        "print(f\"桌遊應收：{summary_3['board_fee']:.2f} 元\")\n",
-        "print(f\"電影應收：{summary_3['movie_fee']:.2f} 元\")\n",
-        "print(f\"總應收：{summary_3['total_fee']:.2f} 元\")"
-      ],
-      "metadata": {
-        "colab": {
-          "base_uri": "https://localhost:8080/"
-        },
-        "id": "GTVBgezt2TNK",
-        "outputId": "d514c0fa-5e7c-40b7-b5b3-503c702327ef"
-      },
-      "execution_count": 2,
-      "outputs": [
-        {
-          "output_type": "stream",
-          "name": "stdout",
-          "text": [
-            "========================================\n",
-            "HW09 活動報名摘要\n",
-            "========================================\n",
-            "活動：桌遊體驗，每人 120.00 元\n",
-            "活動：電影欣賞，每人 80.00 元\n",
-            "\n",
-            "--- [ 測試一 ] ---\n",
-            "桌遊整理串列：['amy', 'ben', 'amy', 'cora']\n",
-            "電影整理串列：['ben', 'dora', 'eric', 'ben']\n",
-            "桌遊去重名單：['amy', 'ben', 'cora']\n",
-            "電影去重名單：['ben', 'dora', 'eric']\n",
-            "桌遊人數：3 人\n",
-            "電影人數：3 人\n",
-            "共同參加者：['ben']\n",
-            "共同人數：1 人\n",
-            "只參加桌遊者：['amy', 'cora']\n",
-            "只參加電影者：['dora', 'eric']\n",
-            "全部參加者：['amy', 'ben', 'cora', 'dora', 'eric']\n",
-            "總不重複人數：5 人\n",
-            "報名人次：6 人次\n",
-            "通知名單前兩位：['amy', 'ben']\n",
-            "桌遊應收：360.00 元\n",
-            "電影應收：240.00 元\n",
-            "總應收：600.00 元\n",
-            "\n",
-            "--- [ 測試二 ] ---\n",
-            "桌遊去重名單：['amy', 'ben', 'cora']\n",
-            "電影去重名單：['ben', 'dora', 'eric', 'frank']\n",
-            "桌遊人數：3 人\n",
-            "電影人數：4 人\n",
-            "共同參加者：['ben']\n",
-            "只參加桌遊者：['amy', 'cora']\n",
-            "只參加電影者：['dora', 'eric', 'frank']\n",
-            "總不重複人數：6 人\n",
-            "報名人次：7 人次\n",
-            "通知名單前兩位：['amy', 'ben']\n",
-            "桌遊應收：360.00 元\n",
-            "電影應收：320.00 元\n",
-            "總應收：680.00 元\n",
-            "\n",
-            "--- [ 測試三 ] ---\n",
-            "桌遊去重名單：['amy', 'ben', 'cora']\n",
-            "電影去重名單：['amy', 'ben', 'cora']\n",
-            "桌遊人數：3 人\n",
-            "電影人數：3 人\n",
-            "共同參加者：['amy', 'ben', 'cora']\n",
-            "只參加桌遊者：[]\n",
-            "只參加電影者：[]\n",
-            "總不重複人數：3 人\n",
-            "報名人次：6 人次\n",
-            "通知名單前兩位：['amy', 'ben']\n",
-            "桌遊應收：360.00 元\n",
-            "電影應收：240.00 元\n",
-            "總應收：600.00 元\n"
-          ]
-        }
-      ]
-    }
-  ]
-}
-}
+# HW09 兩場活動報名整理器
+
+* 學號：D1446111
+* 姓名：林雁慈
+
+## 一、程式用途與執行方式
+本程式用來處理兩場活動（桌遊體驗、電影欣賞）的報名名單。主要功能是自動清除多餘空白並將所有姓名轉成小寫，接著利用串列（list）保留原始輸入與重複記錄，再透過集合（set）進行去重及交集、聯集、差集等比較運算。最後使用字典（dict）與格式化字串計算並印出各場人數、人次與總應收費用。
+
+### 如何在 Colab 開啟與執行
+1. 點擊 GitHub 上的 `activity_signup_學號.ipynb` 檔案。
+2. 點擊畫面上的 **"Open in Colab"** 按鈕開啟筆記本。
+3. 點選上方選單的 **「執行階段」 -> 「全部執行」** 即可。
+
+---
+
+## 二、三組實測摘要
+
+| 測試組別 | 桌遊人數 | 電影人數 | 共同人數 | 總不重複人數 | 報名人次 | 總應收 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **測試一** | 3 人 | 3 人 | 1 人 | 5 人 | 6 人次 | 600.00 元 |
+| **測試二** | 3 人 | 4 人 | 1 人 | 6 人 | 7 人次 | 760.00 元 |
+| **測試三** | 3 人 | 3 人 | 3 人 | 3 人 | 6 人次 | 600.00 元 |
+
+---
+
+## 三、個人回答
+
+### 問題一：測試一中，整理後的桌遊串列有 4 筆資料，為什麼桌遊費用應以 3 人計算？直接把字串拆成 list，和再轉成 set，各自保留了什麼、失去了什麼？
+* **為什麼以 3 人計費**：因為原始名單中有人重複報名（例如 `"Amy"` 和 `"amy"` 重複），按照規定同一個人重複報名只算一位、也只收一次費用，所以必須透過 `set` 去重，找出實際參與的 3 個人來計算費用。
+* **直接把字串拆成 list**：保留了大家的填寫順序、完整記錄以及重複報名的次數，但缺點是無法直接看出實際的正確人數。
+* **轉成 set**：自動過濾掉重複名字並排除了順序，保留了「不重複的名單集合」，但缺點是原本誰先報名、誰重複了幾次這些資訊都會遺失。
+
+### 問題二：測試三中，兩場活動只有 3 位不同的人，為什麼是 6 人次、總應收仍是 600 元？請用集合關係與算式說明。
+* **原因說明**：雖然從總不重複人數（聯集）來看只有 3 個人（`amy`, `ben`, `cora`），但這 3 個人兩場活動都有參加（也就是桌遊去重有 3 人、電影去重也有 3 人）。
+* **算式與說明**：
+  * 報名人次 = 桌遊去重人數（3） + 電影去重人數（3） = 6 人次。
+  * 總應收 = 桌遊應收（3 × 120 = 360） + 電影應收（3 × 80 = 240） = 600 元。
+  * 費用是依據兩場活動各自去重後的實際參加人數來獨立計算的，不是用總人數去乘單一活動費用。
+
+---
+
+## 四、AI 使用紀錄
+* **使用的 AI 工具**：Gemini
+* **主要協助項目**：請 AI 協助規劃 Python 程式的架構，包含字串處理（`strip()` 與 `lower()` 的 list 推導式）、`set` 的集合運算（交集、聯集、差集）以及用 `dict` 記錄結算資料。
+* **自己修改與驗證的部分**：
+  1. 親自核對並測試了兩場活動各集合的差集方向，確保只參加桌遊與只參加電影的名單邏輯正確。
+  2. 檢查金額與人次的計算邏輯，確保是依據各自去重後的獨立人數計費，而不是用總人數計算。
+  3. 實際將程式碼貼到 Google Colab 完整執行三次，確認三組測試的輸出結果和作業預期完全相符。
